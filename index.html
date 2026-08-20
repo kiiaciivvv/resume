@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刘坤 · 个人简历</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tag.skill-level { font-size: 11px; padding: 4px 10px; margin-left: 6px; }
+        .tag.level-1 { background: rgba(99,102,241,0.12); color: var(--primary-dark); border: 1px solid rgba(99,102,241,0.2); }
+        .tag.level-2 { background: rgba(52,211,153,0.12); color: var(--accent-2); border: 1px solid rgba(52,211,153,0.2); }
+        .tag.level-3 { background: rgba(244,114,182,0.12); color: #f472b6; border: 1px solid rgba(244,114,182,0.2); }
+
+        .project-grid, .campus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+
+        .project-card, .campus-card {
+            background: var(--bg-2); border: 1px solid var(--border); padding: 28px; border-radius: 20px;
+            box-shadow: var(--shadow-md); transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .project-card:hover, .campus-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: var(--primary); }
+
+        .project-card::before, .campus-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gradient-1); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+        }
+        .project-card:hover::before, .campus-card:hover::before { transform: scaleX(1); }
+
+        .project-head, .campus-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; gap: 12px; }
+
+        .project-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; flex-shrink: 0; }
+        .p-bg-1 { background: var(--gradient-1); }
+        .p-bg-2 { background: var(--gradient-2); }
+        .p-bg-3 { background: var(--gradient-3); }
+        .p-bg-4 { background: var(--gradient-4); }
+
+        .project-title, .campus-title { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .project-role, .campus-role { font-size: 12px; color: var(--primary-dark); font-weight: 600; }
+        .project-date { font-size: 12px; color: var(--text-dim); white-space: nowrap; }
+
+        .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+        .project-tag { padding: 3px 10px; font-size: 11px; background: var(--bg-3); color: var(--text-light); border: 1px solid var(--border); border-radius: 50px; font-weight: 500; }
+
+        .project-desc { font-size: 13.5px; color: var(--text-light); line-height: 1.8; margin-bottom: 12px; }
+
+        .project-achievements { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+        .project-achievements li { font-size: 13px; color: var(--text); padding-left: 16px; position: relative; line-height: 1.7; }
+        .project-achievements li::before { content: '✦'; position: absolute; left: 0; color: var(--primary); font-size: 10px; top: 4px; }
+        .project-achievements li strong { color: var(--dark); }
+
+        .intent-card { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--border-light); }
+        .intent-item { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.15); border-radius: 12px; font-size: 13px; }
+        .intent-item i { color: var(--primary); }
+        .intent-item strong { color: var(--dark); font-weight: 600; }
+
+        .highlight-badge { display: inline-block; margin-left: 6px; padding: 2px 8px; font-size: 11px; background: var(--gradient-2); color: white; border-radius: 50px; font-weight: 600; }
+
+        @media (max-width: 768px) { .project-grid, .campus-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <!-- 动态背景 -->
+    <div class="bg-animation">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="logo-dot"></span>
+            <span class="logo-text">刘坤 · Resume</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero" class="active">首页</a></li>
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#education">教育背景</a></li>
+            <li><a href="#projects">项目经历</a></li>
+            <li><a href="#skills">技能</a></li>
+            <li><a href="#self">自我评价</a></li>
+            <li><a href="#certificates">荣誉奖项</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    2027届 · 网络工程专业 · 在读本科
+                </div>
+                <h1 class="hero-title">
+                    你好，我是<br>
+                    <span class="gradient-text">刘 坤</span>
+                </h1>
+                <p class="hero-subtitle">
+                    广东外语外贸大学南国商学院 · 网络工程<br>
+                    专注网络技术与非遗数字化，善于团队协作，期待在实践中持续成长！
+                </p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> 联系我</a>
+                    <a href="#projects" class="btn btn-secondary"><i class="fas fa-project-diagram"></i> 查看项目</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="83">0</div>
+                        <div class="stat-label">平均成绩</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="2">0</div>
+                        <div class="stat-label">国家级/省级项目</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="4">0</div>
+                        <div class="stat-label">荣誉奖项</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring ring-1"></div>
+                    <div class="avatar-ring ring-2"></div>
+                    <div class="avatar-ring ring-3"></div>
+                    <div class="avatar">
+                        <img src="avatar.jpg.jpeg" alt="头像">
+                    </div>
+                    <div class="float-badge badge-github"><i class="fas fa-network-wired"></i><span>网络工程</span></div>
+                    <div class="float-badge badge-code"><i class="fas fa-book"></i><span>在读本科</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>向下滚动了解我</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">关于我</span>
+                <h2 class="section-title">一个认真努力的<span class="gradient-text"> 网络工程学子</span></h2>
+            </div>
+            <div class="about-content">
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3>个人简介</h3>
+                    <p>
+                        我是一名网络工程专业本科生，在校期间认真学习计算机网络、路由交换、网络安全等核心课程，平均成绩 83.65 分。
+                        通过参与国家级大学生创新创业训练计划及全国大学生电子商务挑战赛，
+                        积累了项目调研、团队协调与数字化推广的实践经验。
+                        性格亲和力强，善于沟通协调，具备快速学习跨领域知识的能力，期待在工作中持续成长。
+                    </p>
+                    <div class="intent-card">
+                        <div class="intent-item"><i class="fas fa-bullseye"></i><span>求职意向：<strong>网络工程 / 项目运营</strong></span></div>
+                        <div class="intent-item"><i class="fas fa-map-marker-alt"></i><span>期望城市：<strong>广州 / 深圳</strong></span></div>
+                        <div class="intent-item"><i class="fas fa-clock"></i><span>到岗时间：<strong>面议</strong></span></div>
+                        <div class="intent-item"><i class="fas fa-graduation-cap"></i><span>毕业时间：<strong>2027年6月</strong></span></div>
+                    </div>
+                </div>
+                <div class="about-info">
+                    <div class="info-item"><i class="fas fa-user"></i><div><span class="info-label">姓名</span><span class="info-value">刘坤</span></div></div>
+                    <div class="info-item"><i class="fas fa-venus-mars"></i><div><span class="info-label">性别 / 年龄</span><span class="info-value">男 · 21岁</span></div></div>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><span class="info-label">现居地</span><span class="info-value">广东省广州市</span></div></div>
+                    <div class="info-item"><i class="fas fa-graduation-cap"></i><div><span class="info-label">学历 / 专业</span><span class="info-value">本科 · 网络工程</span></div></div>
+                    <div class="info-item"><i class="fas fa-briefcase"></i><div><span class="info-label">工作状态</span><span class="info-value available">寻找实习机会</span></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section education">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">教育背景</span>
+                <h2 class="section-title">我的<span class="gradient-text"> 学习历程</span></h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-dot"><i class="fas fa-university"></i></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">2023.09 - 2027.06（在读）</span>
+                        <h3>网络工程 · 本科</h3>
+                        <p class="timeline-school">广东外语外贸大学南国商学院</p>
+                        <ul class="timeline-list">
+                            <li><strong>学业表现：</strong>平均成绩 83.65 分</li>
+                            <li><strong>核心课程：</strong>计算机网络、路由与交换、移动通讯与无线网络、华为高级路由交换技术、操作系统、程序设计基础、JAVA、Web应用开发、网络安全</li>
+                            <li><strong>专业方向：</strong>网络规划与运维，兼顾程序设计与Web开发</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-dot"><i class="fas fa-book-reader"></i></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">高中阶段</span>
+                        <h3>理科 · 高中</h3>
+                        <p class="timeline-school">普通高级中学</p>
+                        <ul class="timeline-list">
+                            <li>理科基础扎实，尤其数学与物理成绩优良</li>
+                            <li>为大学工科学习建立了良好的逻辑思维与学习习惯</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">项目经历</span>
+                <h2 class="section-title">我<span class="gradient-text"> 做过的项目</span></h2>
+                <p style="color:var(--text-light);margin-top:12px;">（含国家级创新训练计划与省级竞赛项目）</p>
+            </div>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-head">
+                        <div style="display:flex;gap:14px;align-items:flex-start;">
+                            <div class="project-icon p-bg-1"><i class="fas fa-landmark"></i></div>
+                            <div>
+                                <div class="project-title">数字化时代下非遗融汇剖析与发展研究<span class="highlight-badge">国家级</span></div>
+                                <div class="project-role">大学生创新创业训练计划 · 核心成员</div>
+                            </div>
+                        </div>
+                        <div class="project-date">2025.03 - 至今</div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">非遗数字化</span><span class="project-tag">潮汕英歌舞</span><span class="project-tag">调研分析</span><span class="project-tag">内容框架</span>
+                    </div>
+                    <p class="project-desc">围绕潮汕英歌舞的非遗数字化建设开展研究，参与从前期调研、需求分析到数字化内容框架搭建的完整流程，推动非遗文化线上传播路径探索。</p>
+                    <ul class="project-achievements">
+                        <li>参与前期调研与需求分析，明确非遗数字化建设的核心目标</li>
+                        <li>负责收集整理非遗传承资料，协助撰写项目调研报告，为平台功能设计提供数据支撑</li>
+                        <li>协助团队完成数字化内容框架搭建，推动非遗文化线上传播路径探索</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <div class="project-head">
+                        <div style="display:flex;gap:14px;align-items:flex-start;">
+                            <div class="project-icon p-bg-2"><i class="fas fa-store"></i></div>
+                            <div>
+                                <div class="project-title">潮起英歌·文化融合平台<span class="highlight-badge">省级二等奖</span></div>
+                                <div class="project-role">全国大学生电子商务"创新、创意及创业"挑战赛 · 项目负责人</div>
+                            </div>
+                        </div>
+                        <div class="project-date">2024.12 - 2025.06</div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">B2B2C</span><span class="project-tag">非遗文创</span><span class="project-tag">商业模式</span><span class="project-tag">商务洽谈</span><span class="project-tag">团队统筹</span>
+                    </div>
+                    <p class="project-desc">搭建非遗文创文化融合平台，主导从项目规划、平台设计到商业化落地的全流程工作，与潮汕英歌舞演出团队达成合作意向。</p>
+                    <ul class="project-achievements">
+                        <li>统筹项目整体规划，负责跨专业团队的日常任务协调与进度跟进，主导平台设计、学术调研、商业化落地全板块工作</li>
+                        <li>搭建 B2B2C 非遗文创商业模式，落地线上宣传、内容运营等数字化推广工作</li>
+                        <li>与潮汕地区英歌舞专业演出团队进行商务合作洽谈，达成初步合作意向，推动文创产品联合开发</li>
+                        <li>项目荣获<strong>省级二等奖</strong>，并在学院创新创业成果展中展示</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">技能专长</span>
+                <h2 class="section-title">我<span class="gradient-text"> 掌握的技能</span></h2>
+                <p style="color:var(--text-light);margin-top:12px;">（技能等级根据真实掌握情况标注）</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="category-header"><i class="fas fa-network-wired category-icon"></i><h3>网络技术</h3></div>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div class="skill-head"><span class="skill-name">华为路由交换（eNSP）<span class="tag skill-level level-1">掌握</span></span><span class="skill-percent">78%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-progress="78"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-head"><span class="skill-name">计算机网络<span class="tag skill-level level-1">掌握</span></span><span class="skill-percent">80%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-progress="80"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-head"><span class="skill-name">网络安全<span class="tag skill-level level-2">熟悉</span></span><span class="skill-percent">65%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-progress="65"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-head"><span class="skill-name">移动通讯与无线网络<span class="tag skill-level level-2">熟悉</span></span><span class="skill-percent">62%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-progress="62"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="category-header"><i class="fas fa-laptop-code category-icon"></i><h3>编程与开发</h3></div>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div class="skill-head"><span class="skill-name">Python<span class="tag skill-level level-2">熟悉</span></span><span class="skill-percent">70%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-progress="70"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-head"><span class="skill-name">Java<span class="tag skill-level level-2">熟悉</span></span><span class="skill-percent">65%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-progress="65"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-head"><span class="skill-name">Web 应用开发<span class="tag skill-level level-3">了解</span></span><span class="skill-percent">55%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-progress="55"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-head"><span class="skill-name">MySQL<span class="tag skill-level level-2">熟悉</span></span><span class="skill-percent">60%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-progress="60"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="category-header"><i class="fas fa-tools category-icon"></i><h3>工具 / 软技能</h3></div>
+                    <div class="skill-tags">
+                        <span class="tag"><i class="fab fa-linux"></i> Linux</span>
+                        <span class="tag"><i class="fas fa-network-wired"></i> eNSP</span>
+                        <span class="tag"><i class="fas fa-mobile-alt"></i> 鸿蒙开发认证</span>
+                        <span class="tag"><i class="fas fa-users"></i> 团队协调</span>
+                        <span class="tag"><i class="fas fa-comments"></i> 沟通表达</span>
+                        <span class="tag"><i class="fas fa-bolt"></i> 执行力</span>
+                        <span class="tag"><i class="fas fa-book-reader"></i> 快速学习</span>
+                        <span class="tag"><i class="fas fa-handshake"></i> 商务洽谈</span>
+                    </div>
+                    <div class="language-skills">
+                        <div class="lang-item">
+                            <span class="lang-name">中文</span>
+                            <div class="lang-dots"><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span></div>
+                            <span class="lang-level">母语</span>
+                        </div>
+                        <div class="lang-item">
+                            <span class="lang-name">英语</span>
+                            <div class="lang-dots"><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+                            <span class="lang-level">IELTS 5.5 · CET-4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Self Evaluation Section -->
+    <section id="self" class="section campus" style="background: var(--bg-1);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">自我评价</span>
+                <h2 class="section-title">我的<span class="gradient-text"> 个人特质</span></h2>
+                <p style="color:var(--text-light);margin-top:12px;">（真实的自我认知，是我成长的起点）</p>
+            </div>
+            <div class="campus-grid">
+                <div class="campus-card">
+                    <div class="campus-head">
+                        <div style="display:flex;gap:14px;align-items:flex-start;">
+                            <div class="project-icon p-bg-3"><i class="fas fa-comments"></i></div>
+                            <div><div class="campus-title">沟通能力与执行力</div><div class="campus-role">团队协作 · 任务推进</div></div>
+                        </div>
+                    </div>
+                    <ul class="project-achievements">
+                        <li>亲和力强，善于协调团队分歧，营造融洽的合作氛围</li>
+                        <li>能够高效推动任务落地，确保项目按计划完成</li>
+                        <li>在全国电商挑战赛中担任项目负责人，统筹跨专业团队协作</li>
+                    </ul>
+                </div>
+                <div class="campus-card">
+                    <div class="campus-head">
+                        <div style="display:flex;gap:14px;align-items:flex-start;">
+                            <div class="project-icon p-bg-4"><i class="fas fa-shield-alt"></i></div>
+                            <div><div class="campus-title">责任心与主动性</div><div class="campus-role">主动承担 · 快速学习</div></div>
+                        </div>
+                    </div>
+                    <ul class="project-achievements">
+                        <li>责任心突出，主动承担关键任务，不推诿不拖延</li>
+                        <li>具备快速学习跨领域知识并应用于实践的能力</li>
+                        <li>在非遗数字化项目中主动学习非遗文化与数字化传播知识</li>
+                    </ul>
+                </div>
+                <div class="campus-card">
+                    <div class="campus-head">
+                        <div style="display:flex;gap:14px;align-items:flex-start;">
+                            <div class="project-icon p-bg-2"><i class="fas fa-basketball-ball"></i></div>
+                            <div><div class="campus-title">热爱运动 · 校篮球队员</div><div class="campus-role">第28届中国大学生篮球二级联赛（广东赛区）</div></div>
+                        </div>
+                        <div class="project-date">运动员</div>
+                    </div>
+                    <ul class="project-achievements">
+                        <li>作为校篮球队运动员参加第28届中国大学生篮球二级联赛（广东赛区）基层赛</li>
+                        <li>热爱篮球等体育运动，坚持日常训练，保持良好的体能与竞技状态</li>
+                        <li>通过体育运动培养了团队协作意识、抗压能力与拼搏精神</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section certificates">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">荣誉奖项 & 证书</span>
+                <h2 class="section-title">获得的<span class="gradient-text"> 认可与肯定</span></h2>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card"><div class="cert-icon bg-3"><i class="fas fa-trophy"></i></div><div class="cert-body"><h3>挑战杯 · 省级二等奖</h3><p class="cert-issuer">大学生课外学术科技作品竞赛</p><span class="cert-date">2025年7月</span></div></div>
+                <div class="cert-card"><div class="cert-icon bg-1"><i class="fab fa-huawei"></i></div><div class="cert-body"><h3>华为 ICT 大赛 · 二等奖</h3><p class="cert-issuer">校内选拔赛 · 网络方向</p><span class="cert-date">2025年6月</span></div></div>
+                <div class="cert-card"><div class="cert-icon bg-5"><i class="fas fa-medal"></i></div><div class="cert-body"><h3>电商"创新、创意及创业"挑战赛 · 省级二等奖</h3><p class="cert-issuer">全国大学生电子商务竞赛</p><span class="cert-date">2025年6月</span></div></div>
+                <div class="cert-card"><div class="cert-icon bg-6"><i class="fas fa-award"></i></div><div class="cert-body"><h3>学业创新奖学金</h3><p class="cert-issuer">2024-2025学年</p><span class="cert-date">2025年</span></div></div>
+                <div class="cert-card"><div class="cert-icon bg-2"><i class="fas fa-mobile-screen"></i></div><div class="cert-body"><h3>华为鸿蒙应用开发工程师</h3><p class="cert-issuer">华为 · 初级认证</p><span class="cert-date">已获认证</span></div></div>
+                <div class="cert-card"><div class="cert-icon bg-4"><i class="fas fa-language"></i></div><div class="cert-body"><h3>英语 IELTS 5.5 / CET-4</h3><p class="cert-issuer">雅思 · 大学英语四级</p><span class="cert-date">已通过</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="section-header left-align">
+                    <span class="section-tag">联系方式</span>
+                    <h2 class="section-title">期待<span class="gradient-text"> 与您沟通</span></h2>
+                    <p class="section-desc">作为一名正在成长的学生，我深知自己还有很多不足，<br>但我有认真的态度和快速学习的能力。期待获得面试机会！</p>
+                </div>
+                <div class="contact-info">
+                    <a href="mailto:457759109@qq.com" class="contact-card">
+                        <div class="contact-icon email"><i class="fas fa-envelope"></i></div>
+                        <div><span class="contact-label">邮箱（推荐）</span><span class="contact-value">457759109@qq.com</span></div>
+                    </a>
+                    <a href="tel:19970903633" class="contact-card">
+                        <div class="contact-icon phone"><i class="fas fa-phone"></i></div>
+                        <div><span class="contact-label">电话 / 微信</span><span class="contact-value">199 7090 3633</span></div>
+                    </a>
+                    <a href="https://github.com/kiiaciivvv" target="_blank" class="contact-card">
+                        <div class="contact-icon website"><i class="fab fa-github"></i></div>
+                        <div><span class="contact-label">GitHub</span><span class="contact-value">github.com/kiiaciivvv</span></div>
+                    </a>
+                    <div class="contact-card">
+                        <div class="contact-icon location"><i class="fas fa-map-marker-alt"></i></div>
+                        <div><span class="contact-label">现居地</span><span class="contact-value">广东省广州市</span></div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/kiiaciivvv" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:457759109@qq.com" class="social-link" title="邮箱"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:19970903633" class="social-link" title="电话"><i class="fas fa-phone"></i></a>
+                    <a href="#" class="social-link" title="微信"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link" title="QQ"><i class="fab fa-qq"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 刘坤 · 个人简历 | 感谢您的阅读 <i class="fas fa-heart" style="color:#ff4757"></i></p>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // 导航栏滚动效果
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+            const sections = document.querySelectorAll('section[id]');
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+
+        // 数字计数器动画
+        const animateCounters = () => {
+            document.querySelectorAll('.stat-number').forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        counter.textContent = target + (target === 83 ? '分' : target === 2 ? '个' : '项');
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 16);
+            });
+        };
+
+        // 技能条动画
+        const animateSkills = () => {
+            document.querySelectorAll('.skill-progress').forEach(bar => {
+                bar.style.width = bar.getAttribute('data-progress') + '%';
+            });
+        };
+
+        // 滚动进入视口时触发动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'hero') animateCounters();
+                    if (entry.target.id === 'skills') animateSkills();
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        // 移动端菜单
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinksContainer = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => navLinksContainer.classList.toggle('open'));
+        navLinks.forEach(link => link.addEventListener('click', () => navLinksContainer.classList.remove('open')));
+    </script>
+</body>
+</html>
